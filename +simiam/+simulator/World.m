@@ -10,6 +10,7 @@ classdef World < handle
         apps
         root_path
         base
+        height_map
     end
     
     methods
@@ -20,6 +21,7 @@ classdef World < handle
             obj.apps = mcodekit.list.dl_list();
             obj.root_path = '';
             obj.base = [];
+            obj.height_map = [];
         end
         
         function build_from_file(obj, root, file)
@@ -131,6 +133,10 @@ classdef World < handle
         end
         
         function add_base(obj, x, y, theta, geometry)
+        end
+        
+        function add_height_map(obj, h)
+           obj.height_map = h; 
         end
         
         function add_robot(obj, type, spv, x, y, theta, goal)

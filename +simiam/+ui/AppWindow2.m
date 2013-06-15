@@ -56,9 +56,11 @@ classdef AppWindow2 < handle
             obj.create_layout();
        end
         
-       function create_simulator(obj, settings_file)
+       function create_simulator(obj, settings_file, h_map)
             world = simiam.simulator.World(obj.view_);
             world.build_from_file(obj.root_, settings_file);
+            
+            world.add_height_map(h_map);
             
             token_k = world.robots.head_;
             while(~isempty(token_k))
@@ -67,6 +69,9 @@ classdef AppWindow2 < handle
                 set(robot.surfaces.tail_.key_.handle_, 'ButtonDownFcn', {@obj.ui_focus_view,robot});
                 token_k = token_k.next_;
             end
+            
+            %draw contours
+            %contour(obj.view_, 1:0.1:20, 1:0.1:20, world.height_map.getScaledMap(0.1));
             
             obj.simulator_ = simiam.simulator.Simulator(obj, world, 0.01);
             obj.simulator_.step([],[]);
@@ -220,6 +225,13 @@ classdef AppWindow2 < handle
             obj.view_ = axes('Parent', obj.layout_.Cell(2,1), ...
                         'ActivePositionProperty','Position', ...
                         'Box', 'on');
+            
+            %draw contours
+            height_map = simiam.simulator.HeightMap(22);
+            [z,x,y] = height_map.getScaledMap(0.1);
+            contour(obj.view_, x, y, z);
+            hold(obj.view_, 'on');
+            
             Update(obj.layout_);
             
             % Target Marker
@@ -251,7 +263,7 @@ classdef AppWindow2 < handle
             obj.ui_toggle_control(obj.ui_buttons_.load, false);
             
             obj.create_callbacks();
-            obj.create_simulator(fullfile(obj.root_, 'settings2.xml'));
+            obj.create_simulator(fullfile(obj.root_, 'settings2.xml'), height_map);
             
             
             
@@ -357,7 +369,7 @@ classdef AppWindow2 < handle
             obj.ui_set_button_icon(obj.ui_buttons_.play, 'ui_control_play.png');
         end
         
-                function ui_zoom_view(obj, src, event, varargin)
+        function ui_zoom_view(obj, src, event, varargin)
             zoom_level_factor = 0.25;
             obj.zoom_level_ = obj.zoom_level_+zoom_level_factor*event.VerticalScrollCount;
             obj.zoom_level_ = min(max(obj.zoom_level_,0.1), obj.boundary_);

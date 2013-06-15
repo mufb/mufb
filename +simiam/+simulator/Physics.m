@@ -28,6 +28,7 @@ classdef Physics < handle
         end
         
         function bool = body_collision_detection(obj)
+            bool = 0;
             token_k = obj.world.robots.head_; 
             while (~isempty(token_k))
                 robot = token_k.key_.robot;
