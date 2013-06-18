@@ -1,12 +1,12 @@
 Model {
-  Name			  "takie_se"
+  Name			  "Model"
   Version		  7.7
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.38"
+    ComputedModelVersion    "1.42"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "takie_se"
+      Cell		      "Model"
       PropName		      "mdlProps"
     }
   }
@@ -37,9 +37,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "hp"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Jun 06 22:21:54 2013"
-  RTWModifiedTimeStamp	  292420714
-  ModelVersionFormat	  "1.%<AutoIncrement:38>"
+  LastModifiedDate	  "Tue Jun 18 23:51:27 2013"
+  RTWModifiedTimeStamp	  293500158
+  ModelVersionFormat	  "1.%<AutoIncrement:42>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -142,7 +142,7 @@ Model {
 	  $ObjectID		  4
 	  Version		  "1.11.0"
 	  StartTime		  "0.0"
-	  StopTime		  "300"
+	  StopTime		  "inf"
 	  AbsTol		  "auto"
 	  FixedStep		  "0.01"
 	  InitialStep		  "auto"
@@ -858,7 +858,7 @@ Model {
     }
   }
   System {
-    Name		    "takie_se"
+    Name		    "Model"
     Location		    [2, 80, 1348, 725]
     Open		    on
     ModelBrowserVisibility  off
@@ -873,7 +873,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "164"
+    SIDHighWatermark	    "168"
     Block {
       BlockType		      Reference
       Name		      "Battery"
@@ -1013,7 +1013,7 @@ Model {
       Name		      "DC Motor(ver 2)"
       SID		      "142"
       Ports		      [1, 2]
-      Position		      [735, 345, 815, 465]
+      Position		      [790, 345, 870, 465]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1293,8 +1293,8 @@ Model {
       BlockType		      SubSystem
       Name		      "Li-Ion Battery"
       SID		      "92"
-      Ports		      [2, 1]
-      Position		      [475, 345, 560, 465]
+      Ports		      [2, 2]
+      Position		      [465, 344, 560, 466]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1327,11 +1327,22 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "chrg/dischrg"
+	  Name			  "chrg/dch"
 	  SID			  "95"
 	  Position		  [45, 268, 75, 282]
 	  Port			  "2"
 	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Add1"
+	  SID			  "165"
+	  Ports			  [2, 1]
+	  Position		  [250, 77, 280, 108]
+	  Inputs		  "+-"
+	  InputSameDT		  off
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
 	}
 	Block {
 	  BlockType		  SubSystem
@@ -2056,7 +2067,7 @@ Model {
 	  Name			  "Integrator"
 	  SID			  "78"
 	  Ports			  [1, 1]
-	  Position		  [115, 25, 145, 55]
+	  Position		  [115, 15, 145, 45]
 	  BlockMirror		  on
 	}
 	Block {
@@ -2068,18 +2079,41 @@ Model {
 	  Denominator		  "[T 1]"
 	}
 	Block {
+	  BlockType		  Constant
+	  Name			  "chrg/dischrg1"
+	  SID			  "166"
+	  Position		  [165, 40, 195, 70]
+	  Value			  "Q"
+	}
+	Block {
 	  BlockType		  Outport
 	  Name			  "voltage"
 	  SID			  "94"
 	  Position		  [185, 248, 215, 262]
 	  IconDisplay		  "Port number"
 	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "energy_left"
+	  SID			  "167"
+	  Position		  [330, 88, 360, 102]
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
 	Line {
 	  SrcBlock		  "Integrator"
 	  SrcPort		  1
-	  Points		  [-80, 0; 0, 215]
-	  DstBlock		  "Chrg/Dis"
-	  DstPort		  2
+	  Points		  [-80, 0; 0, 65]
+	  Branch {
+	    Points		    [0, 160]
+	    DstBlock		    "Chrg/Dis"
+	    DstPort		    2
+	  }
+	  Branch {
+	    Points		    [0, 5]
+	    DstBlock		    "Add1"
+	    DstPort		    2
+	  }
 	}
 	Line {
 	  SrcBlock		  "Low-pass filter"
@@ -2097,7 +2131,7 @@ Model {
 	    DstPort		    1
 	  }
 	  Branch {
-	    Points		    [0, -110]
+	    Points		    [0, -120]
 	    DstBlock		    "Integrator"
 	    DstPort		    1
 	  }
@@ -2109,14 +2143,23 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  SrcBlock		  "chrg/dischrg"
+	  SrcBlock		  "chrg/dch"
 	  SrcPort		  1
 	  DstBlock		  "Chrg/Dis"
 	  DstPort		  3
 	}
-	Annotation {
-	  Name			  "i"
-	  Position		  [235, 32]
+	Line {
+	  SrcBlock		  "chrg/dischrg1"
+	  SrcPort		  1
+	  Points		  [35, 0]
+	  DstBlock		  "Add1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Add1"
+	  SrcPort		  1
+	  DstBlock		  "energy_left"
+	  DstPort		  1
 	}
 	Annotation {
 	  Name			  "i"
@@ -2130,6 +2173,10 @@ Model {
 	  Name			  "i*"
 	  Position		  [89, 188]
 	}
+	Annotation {
+	  Name			  "i"
+	  Position		  [260, 25]
+	}
       }
     }
     Block {
@@ -2137,7 +2184,7 @@ Model {
       Name		      "PWM regulation"
       SID		      "160"
       Ports		      [1, 1]
-      Position		      [605, 345, 685, 465]
+      Position		      [660, 345, 740, 465]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -2277,7 +2324,7 @@ Model {
       Name		      "Scope1"
       SID		      "107"
       Ports		      [1]
-      Position		      [845, 419, 875, 451]
+      Position		      [900, 419, 930, 451]
       Floating		      off
       Location		      [6, 46, 1356, 737]
       Open		      off
@@ -2313,7 +2360,7 @@ Model {
       Name		      "Scope3"
       SID		      "108"
       Ports		      [1]
-      Position		      [670, 229, 700, 261]
+      Position		      [735, 224, 765, 256]
       Floating		      off
       Location		      [6, 46, 1356, 737]
       Open		      off
@@ -2331,7 +2378,7 @@ Model {
       Name		      "Scope4"
       SID		      "155"
       Ports		      [1]
-      Position		      [735, 504, 765, 536]
+      Position		      [670, 509, 700, 541]
       Floating		      off
       Location		      [6, 46, 1356, 737]
       Open		      off
@@ -2340,9 +2387,28 @@ Model {
 	ListType		AxesTitles
 	axes1			"%<SignalLabel>"
       }
-      YMin		      "-0.5"
-      YMax		      "10.5"
+      YMin		      "-0.02"
+      YMax		      "-0.02"
       SaveName		      "ScopeData4"
+      DataFormat	      "StructureWithTime"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "Scope5"
+      SID		      "168"
+      Ports		      [1]
+      Position		      [585, 509, 615, 541]
+      Floating		      off
+      Location		      [6, 46, 1356, 737]
+      Open		      off
+      NumInputPorts	      "1"
+      List {
+	ListType		AxesTitles
+	axes1			"%<SignalLabel>"
+      }
+      YMin		      "-0.02"
+      YMax		      "-0.02"
       DataFormat	      "StructureWithTime"
       SampleTime	      "0"
     }
@@ -2522,12 +2588,12 @@ Model {
       SrcPort		      1
       Points		      [20, 0; 0, -75; -190, 0]
       Branch {
-	Points			[0, -55]
+	Points			[0, -60]
 	DstBlock		"Scope3"
 	DstPort			1
       }
       Branch {
-	Points			[-190, 0]
+	Points			[-270, 0; 0, 75]
 	DstBlock		"Li-Ion Battery"
 	DstPort			1
       }
@@ -2541,16 +2607,23 @@ Model {
     Line {
       SrcBlock		      "Li-Ion Battery"
       SrcPort		      1
-      Points		      [15, 0]
+      Points		      [0, 30; 70, 0]
       Branch {
 	DstBlock		"PWM regulation"
 	DstPort			1
       }
       Branch {
-	Points			[0, 115]
+	Points			[0, 120]
 	DstBlock		"Scope4"
 	DstPort			1
       }
+    }
+    Line {
+      SrcBlock		      "Li-Ion Battery"
+      SrcPort		      2
+      Points		      [0, 90]
+      DstBlock		      "Scope5"
+      DstPort		      1
     }
   }
 }
