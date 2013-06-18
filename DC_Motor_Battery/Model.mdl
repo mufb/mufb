@@ -1,12 +1,12 @@
 Model {
-  Name			  "takie_se"
+  Name			  "Model"
   Version		  7.7
   MdlSubVersion		  0
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.38"
+    ComputedModelVersion    "1.39"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "takie_se"
+      Cell		      "Model"
       PropName		      "mdlProps"
     }
   }
@@ -37,9 +37,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "hp"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Jun 06 22:21:54 2013"
-  RTWModifiedTimeStamp	  292420714
-  ModelVersionFormat	  "1.%<AutoIncrement:38>"
+  LastModifiedDate	  "Tue Jun 18 23:35:38 2013"
+  RTWModifiedTimeStamp	  293499229
+  ModelVersionFormat	  "1.%<AutoIncrement:39>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -76,7 +76,6 @@ Model {
     $ObjectID		    2
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "takie_se"
-    signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
@@ -142,7 +141,7 @@ Model {
 	  $ObjectID		  4
 	  Version		  "1.11.0"
 	  StartTime		  "0.0"
-	  StopTime		  "300"
+	  StopTime		  "inf"
 	  AbsTol		  "auto"
 	  FixedStep		  "0.01"
 	  InitialStep		  "auto"
@@ -684,6 +683,17 @@ Model {
       PreserveConstantTs      off
     }
     Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
+      BlockType		      From
+      IconDisplay	      "Tag"
+      TagVisibility	      "local"
+    }
+    Block {
       BlockType		      Gain
       Gain		      "1"
       Multiplication	      "Element-wise(K.*u)"
@@ -697,6 +707,13 @@ Model {
       RndMeth		      "Floor"
       SaturateOnIntegerOverflow	on
       SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      Goto
+      IconDisplay	      "Tag"
+    }
+    Block {
+      BlockType		      Ground
     }
     Block {
       BlockType		      Inport
@@ -747,6 +764,14 @@ Model {
       Iterations	      "3"
     }
     Block {
+      BlockType		      Mux
+      Inputs		      "4"
+      DisplayOption	      "none"
+      UseBusObject	      off
+      BusObject		      "BusObject"
+      NonVirtualBus	      off
+    }
+    Block {
       BlockType		      Outport
       Port		      "1"
       OutMin		      "[]"
@@ -794,6 +819,17 @@ Model {
       Decimation	      "1"
       SampleInput	      off
       SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      StateSpace
+      A			      "1"
+      B			      "1"
+      C			      "1"
+      D			      "1"
+      X0		      "0"
+      AbsoluteTolerance	      "auto"
+      ContinuousStateAttributes	"''"
+      Realization	      "auto"
     }
     Block {
       BlockType		      SubSystem
@@ -849,6 +885,9 @@ Model {
       AllowDiffInputSizes     off
     }
     Block {
+      BlockType		      Terminator
+    }
+    Block {
       BlockType		      TransferFcn
       Numerator		      "[1]"
       Denominator	      "[1 2 1]"
@@ -858,7 +897,7 @@ Model {
     }
   }
   System {
-    Name		    "takie_se"
+    Name		    "Model"
     Location		    [2, 80, 1348, 725]
     Open		    on
     ModelBrowserVisibility  off
@@ -2340,8 +2379,8 @@ Model {
 	ListType		AxesTitles
 	axes1			"%<SignalLabel>"
       }
-      YMin		      "-0.5"
-      YMax		      "10.5"
+      YMin		      "-0.02"
+      YMax		      "-0.02"
       SaveName		      "ScopeData4"
       DataFormat	      "StructureWithTime"
       SampleTime	      "0"
@@ -2405,63 +2444,347 @@ Model {
       Value		      "C_R"
     }
     Block {
-      BlockType		      Reference
+      BlockType		      SubSystem
       Name		      "powergui"
       SID		      "91"
       Ports		      []
       Position		      [75, 300, 141, 339]
       Priority		      "1"
-      LibraryVersion	      "1.1955"
+      AncestorBlock	      "powerlib/powergui"
+      LibraryVersion	      "*1.1955"
       UserDataPersistent      on
+      CopyFcn		      "powergui( 'Copy_Callback' , gcb , 0 , [ ] );"
+      DeleteFcn		      "% see geck 675031 powergui( 'Copy_Callback' , gcb , 1 , [ ] );\n                              "
+      "                                \npowergui( 'CloseButton_Callback' , gcb , [ ] , [ ] );         \n              "
+      "                                                "
+      ModelCloseFcn	      "powergui( 'CloseButton_Callback' , gcb , [ ] , [ ] );"
+      PreSaveFcn	      "powergui( 'PreSaveFcn_Callback' , gcb , [ ] , [ ] ); \npowergui( 'CloseButton_Callback' , gcb "
+      ", [ ] , [ ] );"
+      InitFcn		      "powergui( 'InitFcn_Callback' , gcb , 0 , [ ] );"
+      StopFcn		      "powergui( 'StopFcn_Callback' , gcb , 0 , [ ] );"
+      NameChangeFcn	      "powergui( 'NameChangeFcn_Callback' , gcb , 0 , [ ] );"
+      OpenFcn		      "powergui(gcb,'Open')"
       FontName		      "Verdana"
-      SourceBlock	      "powerlib/powergui"
-      SourceType	      "PSB option menu block"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
       FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-      GeneratePreprocessorConditionals off
-      SimulationMode	      "Continuous"
-      SampleTime	      "50e-6"
-      frequency		      "60"
-      SPID		      off
-      DisableSnubberDevices   off
-      DisableRonSwitches      off
-      DisableVfSwitches	      off
-      SwTol		      "0"
-      Interpol		      off
-      DisplayEquations	      off
-      FunctionMessages	      off
-      frequencyindice	      "0"
-      Pbase		      "100e6"
-      ErrMax		      "1e-4"
-      Iterations	      "50"
-      UnitsV		      "kV"
-      UnitsW		      "MW"
-      echomessages	      off
-      HookPort		      off
-      EnableUseOfTLC	      off
-      x0status		      "blocks"
-      RestoreLinks	      "warning"
-      ResistiveCurrentMeasurement off
-      Ylog		      off
-      Xlog		      on
-      ShowGrid		      off
-      save		      off
-      variable		      "ZData"
-      ZoomFFT		      off
-      StartTime		      "0.0"
-      cycles		      "1"
-      DisplayStyle	      "1"
-      FreqAxis		      off
-      MaxFrequency	      "1000"
-      frequencyindicesteady   "1"
-      display		      off
-      methode		      off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      MaskType		      "PSB option menu block"
+      MaskDescription	      "Set simulation type, simulation parameters, and preferences\n"
+      MaskHelp		      "web(psbhelp)"
+      MaskPromptString	      "Simulation type:  |Sample time (s):|Phasor frequency (Hz):|Enable use of ideal switching"
+      " devices|Disable snubbers in switching devices|Disable On resistance in switching devices (Ron=0)|Disable Forwar"
+      "d voltage in switching devices (Vf=0)|Switch tolerance|Interpolate|Display circuit differential equations|Displa"
+      "y internal function messages (debug mode feature)|Load flow frequency (Hz):|Base power Pbase (VA):|PQ tolerance "
+      "(pu):|Max iterations:|Voltage units|Power units|Display SimPowerSystems warnings and messages|Add a hook port to"
+      " the powergui block|Use TLC file when in Accelerator Simulation Mode and for code generation|Start simulation wi"
+      "th initial electrical states from:    |Restore disabled links of SimPowerSystems blocks:|Use non ideal current m"
+      "easurement blocks (1e-4Ohm internal resistance) |Frequency Range|Log impedance|log Frequency|grid|Save Data To W"
+      "orkspace|Variable Name|Structure Name (PSBFFTSCOPE)|ZoomFFT (PSBFFTSCOPE)|Start Time (PSBFFTSCOPE)|Cycles (PSBFF"
+      "TSCOPE)|Display style (PSBFFTSCOPE)|Fundamental (PSBFFTSCOPE)|Frequency Axis (PSBFFTSCOPE)|Max Frequency (PSBFFT"
+      "SCOPE)|Frequency indice (STEADYSTATE)|RMS display (STEADYSTATE)|Display Results|Old Ts setting (OBSOLETE)|Phasor"
+      " simulation (OBSOLETE)"
+      MaskStyleString	      "popup(Continuous|Discrete|Phasor),edit,edit,checkbox,checkbox,checkbox,checkbox,edit,chec"
+      "kbox,checkbox,checkbox,edit,edit,edit,edit,popup(V|kV),popup(W|kW|MW),checkbox,checkbox,checkbox,popup(blocks|st"
+      "eady|zero),popup(yes|warning|no),checkbox,edit,checkbox,checkbox,checkbox,checkbox,edit,edit,checkbox,edit,edit,"
+      "edit,edit,checkbox,edit,edit,edit,checkbox,edit,checkbox"
+      MaskVariables	      "SimulationMode=@1;SampleTime=@2;frequency=@3;SPID=@4;DisableSnubberDevices=@5;DisableRonSwi"
+      "tches=@6;DisableVfSwitches=@7;SwTol=@8;Interpol=@9;DisplayEquations=@10;FunctionMessages=@11;frequencyindice=@12"
+      ";Pbase=@13;ErrMax=@14;Iterations=@15;UnitsV=&16;UnitsW=&17;echomessages=@18;HookPort=@19;EnableUseOfTLC=&20;x0st"
+      "atus=@21;RestoreLinks=&22;ResistiveCurrentMeasurement=&23;Frange=@24;Ylog=@25;Xlog=@26;ShowGrid=@27;save=@28;var"
+      "iable=&29;structure=&30;ZoomFFT=@31;StartTime=@32;cycles=@33;DisplayStyle=&34;fundamental=@35;FreqAxis=@36;MaxFr"
+      "equency=@37;frequencyindicesteady=@38;RmsSteady=@39;display=@40;Ts=@41;methode=@42;"
+      MaskTunableValueString  "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,"
+      "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskCallbackString      "powergui('SimulationType',[],[],gcb);|||powergui('SPID',[],[],gcb);|||||||||||||||power"
+      "gui('HookPort',[],[],gcb);|||||||||||||||||||||||"
+      MaskEnableString	      "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,off,on,on,on,on,on,on,on,on,on,on,"
+      "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskVisibilityString    "on,off,off,on,off,off,off,off,off,off,off,on,on,on,on,on,on,on,off,on,on,on,off,off,off"
+      ",off,off,off,off,off,off,off,off,off,off,off,off,off,off,off,off,off"
+      MaskToolTipString	      "on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,on,"
+      "on,on,on,on,on,on,on,on,on,on,on,on,on"
+      MaskInitialization      "message = powergui('MaskInitialization',gcb,SimulationMode,SampleTime);"
+      MaskSelfModifiable      on
+      MaskDisplay	      "color('blue'),disp(message)"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      "none"
+      MaskPortRotate	      "default"
+      MaskIconUnits	      "autoscale"
+      MaskValueString	      "Continuous|50e-6|60|off|off|off|off|0|off|off|off|0|100e6|1e-4|50|kV|MW|off|off|off|block"
+      "s|warning|off||off|on|off|off|ZData||off|0.0|1|1||off|1000|1||off||off"
+      MaskTabNameString	      "Solver,Solver,Solver,Solver,Solver,Solver,Solver,Solver,Solver,Solver,Solver,Load Flow,"
+      "Load Flow,Load Flow,Load Flow,Load Flow,Load Flow,Preferences,Preferences,Preferences,Preferences,Preferences,Pr"
+      "eferences,Preferences,Preferences,Preferences,Preferences,Preferences,Preferences,Preferences,Preferences,Prefer"
+      "ences,Preferences,Preferences,Preferences,Preferences,Preferences,Preferences,Preferences,Preferences,Solver,Sol"
+      "ver"
+      System {
+	Name			"powergui"
+	Location		[137, 405, 682, 583]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	SIDHighWatermark	"67"
+	SIDPrevWatermark	"56"
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "EquivalentModel1"
+	  SID			  "91:57"
+	  Ports			  []
+	  Position		  [15, 70, 143, 105]
+	  ShowName		  off
+	  FontName		  "Arial"
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  MaskInitialization	  "S  = GetDataForEquivalentModel('Continuous',gcbh);"
+	  MaskDisplay		  "color('blue')\ndisp('EQUIVALENT CIRCUIT\\nContinuous - No Sfun')"
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  "none"
+	  MaskPortRotate	  "default"
+	  MaskIconUnits		  "autoscale"
+	  System {
+	    Name		    "EquivalentModel1"
+	    Location		    [279, 434, 674, 551]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Sources"
+	      SID		      "91:58"
+	      Ports		      [0, 1]
+	      Position		      [15, 32, 80, 58]
+	      FontName		      "Arial"
+	      FontSize		      14
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"Sources"
+		Location		[16, 100, 737, 762]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  From
+		  Name			  "From1"
+		  SID			  "91:67"
+		  Position		  [15, 21, 85, 49]
+		  GotoTag		  "tp769267b2_5d32_460c_9952_aedd1f46653b"
+		  TagVisibility		  "global"
+		}
+		Block {
+		  BlockType		  Mux
+		  Name			  "Mux"
+		  SID			  "91:59"
+		  Ports			  [1, 1]
+		  Position		  [325, 270, 330, 610]
+		  Inputs		  "1"
+		  DisplayOption		  "bar"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "u"
+		  SID			  "91:60"
+		  Position		  [365, 433, 395, 447]
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  SrcBlock		  "Mux"
+		  SrcPort		  1
+		  DstBlock		  "u"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "From1"
+		  SrcPort		  1
+		  DstBlock		  "Mux"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      StateSpace
+	      Name		      "State-Space"
+	      SID		      "91:61"
+	      Position		      [115, 26, 235, 64]
+	      FontName		      "Arial"
+	      FontSize		      12
+	      A			      "S.A"
+	      B			      "S.B"
+	      C			      "S.C"
+	      D			      "S.D"
+	      X0		      "S.x0"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Yout"
+	      SID		      "91:62"
+	      Ports		      [1]
+	      Position		      [275, 33, 340, 57]
+	      FontName		      "Arial"
+	      FontSize		      14
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"Yout"
+		Location		[124, 85, 631, 971]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "v,i"
+		  SID			  "91:63"
+		  Position		  [15, 373, 45, 387]
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Demux
+		  Name			  "Demux"
+		  SID			  "91:64"
+		  Ports			  [1, 2]
+		  Position		  [100, 191, 105, 569]
+		  BackgroundColor	  "black"
+		  ShowName		  off
+		  Outputs		  "[1 1]"
+		  DisplayOption		  "bar"
+		}
+		Block {
+		  BlockType		  Goto
+		  Name			  "Goto1"
+		  SID			  "91:65"
+		  Position		  [325, 21, 395, 49]
+		  GotoTag		  "tp488ec4fa_d894_4f3e_8a52_45b83f626851"
+		  TagVisibility		  "global"
+		}
+		Block {
+		  BlockType		  Goto
+		  Name			  "Goto2"
+		  SID			  "91:66"
+		  Position		  [325, 66, 395, 94]
+		  GotoTag		  "tp8c3f2196_0f28_47ac_9d11_e8b2b0995c37"
+		  TagVisibility		  "global"
+		}
+		Line {
+		  SrcBlock		  "v,i"
+		  SrcPort		  1
+		  DstBlock		  "Demux"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Demux"
+		  SrcPort		  1
+		  DstBlock		  "Goto1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Demux"
+		  SrcPort		  2
+		  DstBlock		  "Goto2"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Sources"
+	      SrcPort		      1
+	      DstBlock		      "State-Space"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "State-Space"
+	      SrcPort		      1
+	      DstBlock		      "Yout"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Ground
+	  Name			  "Ground"
+	  SID			  "91:55"
+	  Position		  [315, 40, 335, 60]
+	  ShowName		  off
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  SID			  "91:56"
+	  Position		  [355, 40, 375, 60]
+	  ShowName		  off
+	}
+	Line {
+	  SrcBlock		  "Ground"
+	  SrcPort		  1
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Annotation {
+	  Name			  "Graphical user interface for the analysis of  SimPowerSystems circuits. \nPlace the Powergui block in the"
+	  " top-level of your model and double-click\non it to open the GUI."
+	  Position		  [14, 29]
+	  HorizontalAlignment	  "left"
+	  ForegroundColor	  "blue"
+	  FontName		  "Arial"
+	  FontSize		  12
+	}
+      }
     }
     Line {
       LineType		      "Connection"
