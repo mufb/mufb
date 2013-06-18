@@ -27,6 +27,7 @@ classdef K3Supervisor < simiam.controller.Supervisor
         v
         goal
         d_stop
+        d_radius
         d_at_obs
         d_unsafe
         d_prog
@@ -50,6 +51,7 @@ classdef K3Supervisor < simiam.controller.Supervisor
             obj.controllers{5} = simiam.controller.Stop();
             obj.controllers{6} = simiam.controller.FollowWall();
             obj.controllers{7} = simiam.controller.SlidingMode();
+            obj.controllers{8} = simiam.controller.GoToBase();
             
             % set the initial controller
             obj.current_controller = obj.controllers{2};
@@ -82,7 +84,10 @@ classdef K3Supervisor < simiam.controller.Supervisor
                                
             obj.eventsd{7} = struct('event', 'sliding_right', ...
                                     'callback', @sliding_right);
-                               
+                                
+            obj.eventsd{8} = struct('event', 'go_to_base', ...
+                                    'callback', @go_to_base);
+
             obj.prev_ticks = struct('left', 0, 'right', 0);
             
             obj.v               = 0.1;
@@ -92,6 +97,7 @@ classdef K3Supervisor < simiam.controller.Supervisor
             obj.d_stop          = 0.05; 
             obj.d_at_obs        = 0.13;                
             obj.d_unsafe        = 0.03;
+            obj.d_radius        = 2;
             %% END CODE BLOCK %%
             
             obj.d_prog = 10;
@@ -117,10 +123,12 @@ classdef K3Supervisor < simiam.controller.Supervisor
             
             if (obj.check_event('at_goal'))
                 %obj.switch_to_state('stop');
-                obj.change_goal(0,0.6);
-               % obj.switch_to_state('go_to_goal'); 
+                %obj.change_goal(0,0.6);
+                obj.switch_to_state('go_to_base'); 
 %                 [x,y,theta] = obj.state_estimate.unpack();
 %                 fprintf('stopped at (%0.3f,%0.3f)\n', x, y);
+            elseif(obj.is_in_state('go_to_base') && obj.check_event('at_base'))
+                obj.stwitch_to_state('stop');
             elseif(obj.check_event('unsafe'))
                 obj.switch_to_state('avoid_obstacles');                
             else
@@ -244,6 +252,16 @@ classdef K3Supervisor < simiam.controller.Supervisor
             
             % Test distance from goal
             if norm([x - obj.goal(1); y - obj.goal(2)]) < obj.d_stop
+                rc = true;
+            end
+        end
+        
+        function rc = at_base(obj, state, robot)
+            [x,y,theta] = obj.state_estimate.unpack();
+            rc = false;
+            
+            % Test distance from goal
+            if( (x - obj.d_radius < obj.d_stop) || (y - obj.d_radius < obj.d_stop))
                 rc = true;
             end
         end

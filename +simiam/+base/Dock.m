@@ -11,6 +11,7 @@ classdef Dock < simiam.ui.Drawable
            geometry(:,3) = ones(size(geometry,1),1);
            surface = obj.add_surface(geometry, [0.4 0.4 1]);
            set(surface.handle_, 'EdgeColor', 'b');
+           obj.occupied = 0;
         end
         
         function bool = robot_detection(obj, world)
