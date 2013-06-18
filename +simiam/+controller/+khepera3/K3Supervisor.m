@@ -116,7 +116,9 @@ classdef K3Supervisor < simiam.controller.Supervisor
             %% START CODE BLOCK %%
             
             if (obj.check_event('at_goal'))
-                obj.switch_to_state('stop');
+                %obj.switch_to_state('stop');
+                obj.change_goal(0,0.6);
+               % obj.switch_to_state('go_to_goal'); 
 %                 [x,y,theta] = obj.state_estimate.unpack();
 %                 fprintf('stopped at (%0.3f,%0.3f)\n', x, y);
             elseif(obj.check_event('unsafe'))
@@ -246,6 +248,11 @@ classdef K3Supervisor < simiam.controller.Supervisor
             end
         end
 
+        function change_goal(obj, goalX, goalY)
+            obj.goal(1) = goalX;
+            obj.goal(2) = goalY;
+        end
+        
         function rc = obstacle_cleared(obj, state, robot)
             ir_distances = obj.robot.get_ir_distances();
             rc = false;              % Assume initially that the robot is clear of obstacle

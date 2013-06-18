@@ -63,7 +63,13 @@ classdef Simulator < handle
                 token_k = token_k.next_;
             end
 %             fprintf('controls: %0.3fs\n', toc(tstart));
-            
+
+            token_k = obj.world.base.docks.head_;
+            while ( ~isempty(token_k))
+                dock_s = token_k.key_;
+                dock_s.dock.robot_detection(obj.world);
+                token_k = token_k.next_;
+            end
 %             tstart = tic;
             obj.world.apps.head_.key_.run(split);
 %             fprintf('app: %0.3fs\n', toc(tstart));
