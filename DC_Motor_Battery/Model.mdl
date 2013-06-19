@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.44"
+    ComputedModelVersion    "1.45"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -37,9 +37,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "hp"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Jun 19 09:57:01 2013"
+  LastModifiedDate	  "Wed Jun 19 10:03:53 2013"
   RTWModifiedTimeStamp	  293536616
-  ModelVersionFormat	  "1.%<AutoIncrement:44>"
+  ModelVersionFormat	  "1.%<AutoIncrement:45>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -874,50 +874,11 @@ Model {
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "175"
     Block {
-      BlockType		      Reference
-      Name		      "Battery"
-      SID		      "86"
-      Ports		      [0, 1, 0, 0, 0, 2]
-      Position		      [45, 72, 120, 143]
-      BlockMirror	      on
-      ForegroundColor	      "blue"
-      LibraryVersion	      "1.958"
-      FontName		      "Verdana"
-      FontSize		      11
-      SourceBlock	      "electricdrivelib/Extra Sources/Battery"
-      SourceType	      "Battery"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-      GeneratePreprocessorConditionals off
-      BatType		      "Lithium-Ion"
-      ShowDetailedParameters  off
-      NomV		      "10"
-      NomQ		      "10"
-      SOC		      "100"
-      PresetModel	      off
-      MaxQ		      "10"
-      FullV		      "11.6399"
-      Dis_rate		      "4.3478"
-      R			      "0.01"
-      Normal_OP		      "9.0435"
-      expZone		      "[10.8039     0.491304]"
-      Dis_Char		      off
-      current		      "[1.5 3]"
-      Units		      "Ampere-hour"
-      Batt_Tr		      "30"
-    }
-    Block {
       BlockType		      SubSystem
       Name		      "DC Motor(ver 1)"
       SID		      "101"
       Ports		      [1, 2]
-      Position		      [880, 73, 960, 197]
+      Position		      [970, 48, 1050, 172]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1012,7 +973,7 @@ Model {
       Name		      "DC Motor(ver 2)"
       SID		      "142"
       Ports		      [1, 2]
-      Position		      [925, 400, 1005, 520]
+      Position		      [595, 260, 675, 380]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1293,7 +1254,7 @@ Model {
       Name		      "Li-Ion Battery"
       SID		      "92"
       Ports		      [2, 2]
-      Position		      [465, 399, 560, 521]
+      Position		      [135, 259, 230, 381]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -2183,7 +2144,7 @@ Model {
       Name		      "PWM regulation"
       SID		      "160"
       Ports		      [1, 1]
-      Position		      [795, 400, 875, 520]
+      Position		      [465, 260, 545, 380]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -2323,7 +2284,7 @@ Model {
       Name		      "Scope1"
       SID		      "107"
       Ports		      [1]
-      Position		      [1035, 474, 1065, 506]
+      Position		      [705, 334, 735, 366]
       Floating		      off
       Location		      [6, 46, 1356, 737]
       Open		      off
@@ -2340,28 +2301,10 @@ Model {
     }
     Block {
       BlockType		      Scope
-      Name		      "Scope2"
-      SID		      "90"
-      Ports		      [1]
-      Position		      [315, 114, 345, 146]
-      Floating		      off
-      Location		      [5, 46, 1355, 737]
-      Open		      off
-      NumInputPorts	      "1"
-      List {
-	ListType		AxesTitles
-	axes1			"%<SignalLabel>"
-      }
-      SaveName		      "ScopeData2"
-      DataFormat	      "StructureWithTime"
-      SampleTime	      "0"
-    }
-    Block {
-      BlockType		      Scope
       Name		      "Scope3"
       SID		      "108"
       Ports		      [1]
-      Position		      [870, 224, 900, 256]
+      Position		      [540, 84, 570, 116]
       Floating		      off
       Location		      [6, 46, 1356, 737]
       Open		      off
@@ -2379,7 +2322,7 @@ Model {
       Name		      "Scope4"
       SID		      "155"
       Ports		      [1]
-      Position		      [805, 564, 835, 596]
+      Position		      [475, 424, 505, 456]
       Floating		      off
       Location		      [6, 46, 1356, 737]
       Open		      off
@@ -2388,8 +2331,8 @@ Model {
 	ListType		AxesTitles
 	axes1			"%<SignalLabel>"
       }
-      YMin		      "-0.021"
-      YMax		      "-0.019"
+      YMin		      "-0.02"
+      YMax		      "-0.02"
       SaveName		      "ScopeData4"
       DataFormat	      "StructureWithTime"
       SampleTime	      "0"
@@ -2399,52 +2342,25 @@ Model {
       Name		      "Scope5"
       SID		      "168"
       Ports		      [1]
-      Position		      [685, 564, 715, 596]
+      Position		      [355, 424, 385, 456]
       Floating		      off
-      Location		      [1, 46, 1367, 737]
+      Location		      [5, 46, 1355, 737]
       Open		      off
       NumInputPorts	      "1"
       List {
 	ListType		AxesTitles
 	axes1			"%<SignalLabel>"
       }
-      YMin		      "4.96524"
-      YMax		      "4.96524"
+      YMin		      "4.71698"
+      YMax		      "5.2135"
       DataFormat	      "StructureWithTime"
       SampleTime	      "0"
-    }
-    Block {
-      BlockType		      Reference
-      Name		      "Series RLC Branch"
-      SID		      "87"
-      Ports		      [0, 0, 0, 0, 0, 1, 1]
-      Position		      [305, 191, 375, 219]
-      LibraryVersion	      "1.1955"
-      FontName		      "Verdana"
-      FontSize		      11
-      SourceBlock	      "powerlib/Elements/Series RLC Branch"
-      SourceType	      "Series RLC Branch"
-      PhysicalDomain	      "powersysdomain"
-      SubClassName	      "unknown"
-      LeftPortType	      "p1"
-      RightPortType	      "p1"
-      LConnTagsString	      "__new0"
-      RConnTagsString	      "__new0"
-      BranchType	      "R"
-      Resistance	      "100"
-      Inductance	      "1e-3"
-      SetiL0		      off
-      InitialCurrent	      "0"
-      Capacitance	      "1e-6"
-      Setx0		      off
-      InitialVoltage	      "0"
-      Measurements	      "None"
     }
     Block {
       BlockType		      Switch
       Name		      "Switch"
       SID		      "169"
-      Position		      [685, 425, 735, 465]
+      Position		      [355, 285, 405, 325]
       Threshold		      "1"
       InputSameDT	      off
       SaturateOnIntegerOverflow	off
@@ -2454,7 +2370,7 @@ Model {
       BlockType		      Switch
       Name		      "Switch2"
       SID		      "173"
-      Position		      [605, 235, 655, 275]
+      Position		      [275, 95, 325, 135]
       BlockMirror	      on
       Threshold		      "1"
       InputSameDT	      off
@@ -2462,48 +2378,24 @@ Model {
       SampleTime	      "Smpl"
     }
     Block {
-      BlockType		      Reference
-      Name		      "Voltage Measurement"
-      SID		      "89"
-      Ports		      [0, 1, 0, 0, 0, 2]
-      Position		      [200, 118, 225, 142]
-      LibraryVersion	      "1.1955"
-      FontName		      "Verdana"
-      FontSize		      11
-      SourceBlock	      "powerlib/Measurements/Voltage Measurement"
-      SourceType	      "Voltage Measurement"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-      GeneratePreprocessorConditionals off
-      PhasorSimulation	      off
-      OutputType	      "Complex"
-      PSBequivalent	      "0"
-    }
-    Block {
       BlockType		      Constant
       Name		      "chrg/dischrg"
       SID		      "105"
-      Position		      [390, 475, 420, 505]
+      Position		      [60, 335, 90, 365]
       Value		      "C_R"
     }
     Block {
       BlockType		      Constant
       Name		      "chrg/dischrg1"
       SID		      "170"
-      Position		      [605, 430, 635, 460]
+      Position		      [275, 290, 305, 320]
       Value		      "C_R"
     }
     Block {
       BlockType		      Constant
       Name		      "chrg/dischrg2"
       SID		      "174"
-      Position		      [720, 240, 750, 270]
+      Position		      [390, 100, 420, 130]
       BlockMirror	      on
       Value		      "C_R"
     }
@@ -2511,7 +2403,7 @@ Model {
       BlockType		      Constant
       Name		      "chrg_curr"
       SID		      "175"
-      Position		      [720, 180, 750, 210]
+      Position		      [390, 40, 420, 70]
       BlockMirror	      on
       Value		      "-5"
     }
@@ -2519,109 +2411,8 @@ Model {
       BlockType		      Constant
       Name		      "no_input"
       SID		      "171"
-      Position		      [605, 375, 635, 405]
+      Position		      [275, 235, 305, 265]
       Value		      "0"
-    }
-    Block {
-      BlockType		      Reference
-      Name		      "powergui"
-      SID		      "91"
-      Ports		      []
-      Position		      [75, 300, 141, 339]
-      Priority		      "1"
-      LibraryVersion	      "1.1955"
-      UserDataPersistent      on
-      FontName		      "Verdana"
-      SourceBlock	      "powerlib/powergui"
-      SourceType	      "PSB option menu block"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-      GeneratePreprocessorConditionals off
-      SimulationMode	      "Continuous"
-      SampleTime	      "50e-6"
-      frequency		      "60"
-      SPID		      off
-      DisableSnubberDevices   off
-      DisableRonSwitches      off
-      DisableVfSwitches	      off
-      SwTol		      "0"
-      Interpol		      off
-      DisplayEquations	      off
-      FunctionMessages	      off
-      frequencyindice	      "0"
-      Pbase		      "100e6"
-      ErrMax		      "1e-4"
-      Iterations	      "50"
-      UnitsV		      "kV"
-      UnitsW		      "MW"
-      echomessages	      off
-      HookPort		      off
-      EnableUseOfTLC	      off
-      x0status		      "blocks"
-      RestoreLinks	      "warning"
-      ResistiveCurrentMeasurement off
-      Ylog		      off
-      Xlog		      on
-      ShowGrid		      off
-      save		      off
-      variable		      "ZData"
-      ZoomFFT		      off
-      StartTime		      "0.0"
-      cycles		      "1"
-      DisplayStyle	      "1"
-      FreqAxis		      off
-      MaxFrequency	      "1000"
-      frequencyindicesteady   "1"
-      display		      off
-      methode		      off
-    }
-    Line {
-      LineType		      "Connection"
-      Labels		      [0, 0]
-      SrcBlock		      "Series RLC Branch"
-      SrcPort		      LConn1
-      Points		      [0, -10; -115, 0]
-      Branch {
-	ConnectType		"DEST_SRC"
-	Points			[-40, 0]
-	DstBlock		"Battery"
-	DstPort			LConn2
-      }
-      Branch {
-	ConnectType		"DEST_SRC"
-	Points			[0, -60]
-	DstBlock		"Voltage Measurement"
-	DstPort			LConn2
-      }
-    }
-    Line {
-      LineType		      "Connection"
-      SrcBlock		      "Series RLC Branch"
-      SrcPort		      RConn1
-      Points		      [10, 0; 0, -115; -210, 0]
-      Branch {
-	ConnectType		"DEST_SRC"
-	DstBlock		"Battery"
-	DstPort			LConn1
-      }
-      Branch {
-	ConnectType		"DEST_SRC"
-	Points			[-5, 0]
-	DstBlock		"Voltage Measurement"
-	DstPort			LConn1
-      }
-    }
-    Line {
-      SrcBlock		      "Voltage Measurement"
-      SrcPort		      1
-      DstBlock		      "Scope2"
-      DstPort		      1
     }
     Line {
       SrcBlock		      "chrg/dischrg"
