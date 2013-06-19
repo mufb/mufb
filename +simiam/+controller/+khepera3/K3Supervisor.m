@@ -31,6 +31,7 @@ classdef K3Supervisor < simiam.controller.Supervisor
         d_at_obs
         d_unsafe
         d_prog
+        going_base
         %p
         
         direction
@@ -53,6 +54,7 @@ classdef K3Supervisor < simiam.controller.Supervisor
             obj.controllers{7} = simiam.controller.SlidingMode();
             obj.controllers{8} = simiam.controller.GoToBase();
             obj.controllers{9} = simiam.controller.WaitingForDock();
+            obj.controllers{10} = simiam.controller.GoToQueue();
             
             % set the initial controller
             obj.current_controller = obj.controllers{2};
@@ -99,6 +101,7 @@ classdef K3Supervisor < simiam.controller.Supervisor
             obj.d_at_obs        = 0.13;                
             obj.d_unsafe        = 0.03;
             obj.d_radius        = 2;
+            obj.going_base      = false;
             %% END CODE BLOCK %%
             
             obj.d_prog = 10;
@@ -119,19 +122,20 @@ classdef K3Supervisor < simiam.controller.Supervisor
             inputs = obj.controllers{7}.inputs; 
             inputs.x_g = obj.goal(1);
             inputs.y_g = obj.goal(2);    
-            going_base = false;
             %% START CODE BLOCK %%
             
-            if (obj.check_event('at_goal'))
+            if (obj.check_event('at_goal') && obj.is_in_state('go_to_goal'))
                 %obj.switch_to_state('stop');
                 %obj.change_goal(0,0.6);
                 obj.switch_to_state('go_to_base');
-                going_base = true;
+                obj.going_base = true;
 %                 [x,y,theta] = obj.state_estimate.unpack();
 %                 fprintf('stopped at (%0.3f,%0.3f)\n', x, y);
+            elseif(obj.is_in_state('go_to_queue') && obj.check_event('at_goal'))
+                obj.switch_to_state('stop');
             elseif(obj.is_in_state('go_to_base') && obj.check_event('at_base'))
                 obj.switch_to_state('waiting_for_dock');
-                going_base = false;
+                obj.going_base = false;
             elseif(obj.check_event('unsafe'))
                 obj.switch_to_state('avoid_obstacles');                
             else
@@ -149,7 +153,7 @@ classdef K3Supervisor < simiam.controller.Supervisor
                     end
                 elseif (obj.is_in_state('follow_wall') && strcmp(obj.direction,'left'))
                     if(obj.check_event('progress_made') && ~obj.check_event('sliding_left'))
-                        if( going_base )
+                        if( obj.going_base )
                             obj.switch_to_state('go_to_base');  
                         else
                             obj.switch_to_state('go_to_goal');
@@ -157,7 +161,7 @@ classdef K3Supervisor < simiam.controller.Supervisor
                     end
                 elseif (obj.is_in_state('follow_wall') && strcmp(obj.direction, 'right'))
                     if(obj.check_event('progress_made') && ~obj.check_event('sliding_right'))
-                        if( going_base )
+                        if( obj.going_base )
                             obj.switch_to_state('go_to_base');  
                         else
                             obj.switch_to_state('go_to_goal');
@@ -165,7 +169,7 @@ classdef K3Supervisor < simiam.controller.Supervisor
                     end
                 elseif (obj.is_in_state('avoid_obstacles'))
                     if(obj.check_event('obstacle_cleared'))
-                        if( going_base )
+                        if( obj.going_base )
                             obj.switch_to_state('go_to_base');  
                         else
                             obj.switch_to_state('go_to_goal');

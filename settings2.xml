@@ -58,26 +58,40 @@
 	</obstacle>
 	
     <robot type="Khepera3">
-        <supervisor type="khepera3.K3Supervisor" goalX = "2.5" goalY = "0"/>
-        <pose x="1" y="0" theta="1" />
+        <supervisor type="khepera3.K3Supervisor" goalX = "-1.5" goalY = "0"/>
+        <pose x="-1" y="0" theta="1" />
     </robot>
     
 	<robot type="Khepera3">
-		<supervisor type="khepera3.K3Supervisor" goalX = "2.5" goalY = "1.5"/>
-		<pose x="1" y="-1" theta="0" />
+		<supervisor type="khepera3.K3Supervisor" goalX = "0" goalY = "-2"/>
+		<pose x="0.2" y="-1" theta="0" />
 	</robot>
 	
 	<robot type="Khepera3">
-		<supervisor type="khepera3.K3Supervisor" goalX = "4" goalY = "4"/>
-		<pose x="3" y="3" theta="0" />
+		<supervisor type="khepera3.K3Supervisor" goalX = "2.5" goalY = "0"/>
+		<pose x="1" y="0" theta="0" />
 	</robot>
 	
-	<!--<robot type="Khepera3">
-		<supervisor type="khepera3.K3Supervisor" goalX = "1" goalY = "-1"/>
-		<pose x="1" y="1" theta="0" />
+	<robot type="Khepera3">
+		<supervisor type="khepera3.K3Supervisor" goalX = "0" goalY = "3"/>
+		<pose x="0" y="2" theta="0" />
 	</robot>
-	-->
     
+    <robot type="Khepera3">
+		<supervisor type="khepera3.K3Supervisor" goalX = "-4" goalY = "-4"/>
+		<pose x="-2" y="-2" theta="0" />
+	</robot>
+    
+    <robot type="Khepera3">
+		<supervisor type="khepera3.K3Supervisor" goalX = "4" goalY = "-4"/>
+		<pose x="2" y="-2" theta="0" />
+	</robot>
+    
+    <robot type="Khepera3">
+		<supervisor type="khepera3.K3Supervisor" goalX = "0" goalY = "-5"/>
+		<pose x="-3" y="-3" theta="0" />
+	</robot>
+	-->    
     
     <!--
     <robot type="Khepera3">
@@ -189,7 +203,7 @@
     
     
     
-    <obstacle>
+    <!--<obstacle>
         <pose x="-1.6" y="-1.5" theta="0" />
         <geometry>
             <point x="0" y="0" />
@@ -237,7 +251,7 @@
             <point x="3" y="0.1" />
             <point x="0" y="0.1" />
         </geometry>
-    </obstacle>
+    </obstacle>-->
     
     <!-- Borders -->
     <obstacle>
