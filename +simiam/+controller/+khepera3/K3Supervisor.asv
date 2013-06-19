@@ -131,7 +131,6 @@ classdef K3Supervisor < simiam.controller.Supervisor
 %                 fprintf('stopped at (%0.3f,%0.3f)\n', x, y);
             elseif(obj.is_in_state('go_to_base') && obj.check_event('at_base'))
                 obj.switch_to_state('waiting_for_dock');
-                going_base = false;
             elseif(obj.check_event('unsafe'))
                 obj.switch_to_state('avoid_obstacles');                
             else
@@ -149,27 +148,16 @@ classdef K3Supervisor < simiam.controller.Supervisor
                     end
                 elseif (obj.is_in_state('follow_wall') && strcmp(obj.direction,'left'))
                     if(obj.check_event('progress_made') && ~obj.check_event('sliding_left'))
-                        if( going_base )
-                            obj.switch_to_state('go_to_base');  
-                        else
-                            obj.switch_to_state('go_to_goal');
-                        end
+                        if( going
+                        obj.switch_to_state('go_to_goal');
                     end
                 elseif (obj.is_in_state('follow_wall') && strcmp(obj.direction, 'right'))
                     if(obj.check_event('progress_made') && ~obj.check_event('sliding_right'))
-                        if( going_base )
-                            obj.switch_to_state('go_to_base');  
-                        else
-                            obj.switch_to_state('go_to_goal');
-                        end
+                        obj.switch_to_state('go_to_goal');
                     end
                 elseif (obj.is_in_state('avoid_obstacles'))
                     if(obj.check_event('obstacle_cleared'))
-                        if( going_base )
-                            obj.switch_to_state('go_to_base');  
-                        else
-                            obj.switch_to_state('go_to_goal');
-                        end
+                        obj.switch_to_state('go_to_goal');
                     end
                 end
  

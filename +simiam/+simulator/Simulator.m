@@ -75,7 +75,7 @@ classdef Simulator < handle
 %             fprintf('app: %0.3fs\n', toc(tstart));
             
             bool = obj.physics.apply_physics();
-            
+            obj.world.base.allocate_waiting_robots(obj.world);
 %             tstart = tic;
             obj.parent.ui_update(split, bool);
             drawnow;

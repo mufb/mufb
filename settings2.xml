@@ -58,21 +58,21 @@
 	</obstacle>
 	
     <robot type="Khepera3">
-        <supervisor type="khepera3.K3Supervisor" goalX = "3.5" goalY = "0"/>
+        <supervisor type="khepera3.K3Supervisor" goalX = "2.5" goalY = "0"/>
         <pose x="1" y="0" theta="1" />
     </robot>
     
-	<!--<robot type="Khepera3">
-		<supervisor type="khepera3.K3Supervisor" goalX = "-1" goalY = "1"/>
-		<pose x="-1" y="-1" theta="0" />
-	</robot>
-	
 	<robot type="Khepera3">
-		<supervisor type="khepera3.K3Supervisor" goalX = "-1" goalY = "-1"/>
+		<supervisor type="khepera3.K3Supervisor" goalX = "2.5" goalY = "1.5"/>
 		<pose x="1" y="-1" theta="0" />
 	</robot>
 	
 	<robot type="Khepera3">
+		<supervisor type="khepera3.K3Supervisor" goalX = "4" goalY = "4"/>
+		<pose x="3" y="3" theta="0" />
+	</robot>
+	
+	<!--<robot type="Khepera3">
 		<supervisor type="khepera3.K3Supervisor" goalX = "1" goalY = "-1"/>
 		<pose x="1" y="1" theta="0" />
 	</robot>
