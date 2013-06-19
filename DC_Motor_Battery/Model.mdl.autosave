@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.44"
+    ComputedModelVersion    "1.43"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -37,9 +37,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "hp"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Jun 19 09:57:01 2013"
-  RTWModifiedTimeStamp	  293536616
-  ModelVersionFormat	  "1.%<AutoIncrement:44>"
+  LastModifiedDate	  "Wed Jun 19 00:27:15 2013"
+  RTWModifiedTimeStamp	  293534985
+  ModelVersionFormat	  "1.%<AutoIncrement:43>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -628,7 +628,7 @@ Model {
 	PropName		"Components"
       }
       Name		      "Configuration"
-      CurrentDlgPage	      "Solver"
+      CurrentDlgPage	      "Code Generation"
       ConfigPrmDlgPosition     [ 243, 69, 1123, 699 ] 
     }
     PropName		    "ConfigurationSets"
@@ -858,7 +858,7 @@ Model {
   }
   System {
     Name		    "Model"
-    Location		    [2, 80, 1348, 725]
+    Location		    [2, 80, 1331, 725]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -872,7 +872,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "175"
+    SIDHighWatermark	    "168"
     Block {
       BlockType		      Reference
       Name		      "Battery"
@@ -1012,7 +1012,7 @@ Model {
       Name		      "DC Motor(ver 2)"
       SID		      "142"
       Ports		      [1, 2]
-      Position		      [925, 400, 1005, 520]
+      Position		      [790, 345, 870, 465]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1293,7 +1293,7 @@ Model {
       Name		      "Li-Ion Battery"
       SID		      "92"
       Ports		      [2, 2]
-      Position		      [465, 399, 560, 521]
+      Position		      [465, 344, 560, 466]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -2183,7 +2183,7 @@ Model {
       Name		      "PWM regulation"
       SID		      "160"
       Ports		      [1, 1]
-      Position		      [795, 400, 875, 520]
+      Position		      [660, 345, 740, 465]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -2323,7 +2323,7 @@ Model {
       Name		      "Scope1"
       SID		      "107"
       Ports		      [1]
-      Position		      [1035, 474, 1065, 506]
+      Position		      [900, 419, 930, 451]
       Floating		      off
       Location		      [6, 46, 1356, 737]
       Open		      off
@@ -2361,7 +2361,7 @@ Model {
       Name		      "Scope3"
       SID		      "108"
       Ports		      [1]
-      Position		      [870, 224, 900, 256]
+      Position		      [735, 224, 765, 256]
       Floating		      off
       Location		      [6, 46, 1356, 737]
       Open		      off
@@ -2379,7 +2379,7 @@ Model {
       Name		      "Scope4"
       SID		      "155"
       Ports		      [1]
-      Position		      [805, 564, 835, 596]
+      Position		      [670, 509, 700, 541]
       Floating		      off
       Location		      [6, 46, 1356, 737]
       Open		      off
@@ -2399,7 +2399,7 @@ Model {
       Name		      "Scope5"
       SID		      "168"
       Ports		      [1]
-      Position		      [685, 564, 715, 596]
+      Position		      [685, 609, 715, 641]
       Floating		      off
       Location		      [1, 46, 1367, 737]
       Open		      off
@@ -2441,27 +2441,6 @@ Model {
       Measurements	      "None"
     }
     Block {
-      BlockType		      Switch
-      Name		      "Switch"
-      SID		      "169"
-      Position		      [685, 425, 735, 465]
-      Threshold		      "1"
-      InputSameDT	      off
-      SaturateOnIntegerOverflow	off
-      SampleTime	      "Smpl"
-    }
-    Block {
-      BlockType		      Switch
-      Name		      "Switch2"
-      SID		      "173"
-      Position		      [605, 235, 655, 275]
-      BlockMirror	      on
-      Threshold		      "1"
-      InputSameDT	      off
-      SaturateOnIntegerOverflow	off
-      SampleTime	      "Smpl"
-    }
-    Block {
       BlockType		      Reference
       Name		      "Voltage Measurement"
       SID		      "89"
@@ -2489,38 +2468,8 @@ Model {
       BlockType		      Constant
       Name		      "chrg/dischrg"
       SID		      "105"
-      Position		      [390, 475, 420, 505]
+      Position		      [390, 420, 420, 450]
       Value		      "C_R"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "chrg/dischrg1"
-      SID		      "170"
-      Position		      [605, 430, 635, 460]
-      Value		      "C_R"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "chrg/dischrg2"
-      SID		      "174"
-      Position		      [720, 240, 750, 270]
-      BlockMirror	      on
-      Value		      "C_R"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "chrg_curr"
-      SID		      "175"
-      Position		      [720, 180, 750, 210]
-      BlockMirror	      on
-      Value		      "-5"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "no_input"
-      SID		      "171"
-      Position		      [605, 375, 635, 405]
-      Value		      "0"
     }
     Block {
       BlockType		      Reference
@@ -2638,16 +2587,16 @@ Model {
     Line {
       SrcBlock		      "DC Motor(ver 2)"
       SrcPort		      1
-      Points		      [20, 0; 0, -140; -190, 0]
+      Points		      [20, 0; 0, -75; -190, 0]
       Branch {
-	Points			[0, -50]
+	Points			[0, -60]
 	DstBlock		"Scope3"
 	DstPort			1
       }
       Branch {
-	Points			[-155, 0; 0, -20]
-	DstBlock		"Switch2"
-	DstPort			3
+	Points			[-270, 0; 0, 75]
+	DstBlock		"Li-Ion Battery"
+	DstPort			1
       }
     }
     Line {
@@ -2658,35 +2607,8 @@ Model {
     }
     Line {
       SrcBlock		      "Li-Ion Battery"
-      SrcPort		      2
-      Points		      [0, 90]
-      DstBlock		      "Scope5"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "chrg/dischrg1"
       SrcPort		      1
-      DstBlock		      "Switch"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Li-Ion Battery"
-      SrcPort		      1
-      Points		      [20, 0; 0, 50; 85, 0]
-      DstBlock		      "Switch"
-      DstPort		      3
-    }
-    Line {
-      SrcBlock		      "no_input"
-      SrcPort		      1
-      Points		      [15, 0; 0, 40]
-      DstBlock		      "Switch"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Switch"
-      SrcPort		      1
-      Points		      [20, 0; 0, 15; 10, 0]
+      Points		      [0, 30; 70, 0]
       Branch {
 	DstBlock		"PWM regulation"
 	DstPort			1
@@ -2698,23 +2620,10 @@ Model {
       }
     }
     Line {
-      SrcBlock		      "chrg/dischrg2"
-      SrcPort		      1
-      DstBlock		      "Switch2"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "chrg_curr"
-      SrcPort		      1
-      Points		      [-45, 0]
-      DstBlock		      "Switch2"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Switch2"
-      SrcPort		      1
-      Points		      [-170, 0; 0, 175]
-      DstBlock		      "Li-Ion Battery"
+      SrcBlock		      "Li-Ion Battery"
+      SrcPort		      2
+      Points		      [0, 190]
+      DstBlock		      "Scope5"
       DstPort		      1
     }
   }
