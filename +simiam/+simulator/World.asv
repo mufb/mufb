@@ -149,7 +149,6 @@ classdef World < handle
            supervisor = r(goal);
            
            %supervisor.attach_robot(robot, pose);
-           robot.attach_supervisor(supervisor, pose);
            
 %            parameter_file = fullfile(obj.root_path, 'parameters.xml');
 %            [file, path, extension] = uigetfile(parameter_file, 'Pick a XML file with the parameters for the PID regulator.');

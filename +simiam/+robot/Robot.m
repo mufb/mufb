@@ -12,9 +12,9 @@ classdef Robot < simiam.ui.Drawable
             obj = obj@simiam.ui.Drawable(parent, start_pose);
         end
         
-        function attach_supervisor(obj, supervisor)
+        function attach_supervisor(obj, supervisor, pose)
             obj.supervisor = supervisor;
-            supervisor.attach_robot(obj);
+            supervisor.attach_robot(obj, pose);
         end
     end
     

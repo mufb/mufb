@@ -70,14 +70,7 @@ classdef Simulator < handle
                 dock_o = dock_s.dock;
                 dock_o.robot_detection(obj.world);
                 if( dock_o.occupied )
-                    dock_o.cycles = dock_o.cycles + 1;
-                    fprintf('%d\n', dock_o.cycles);
-                    if( dock_o.cycles == 80 )
-                        fprintf('500!');
-                        dock_o.charging_robot.supervisor.change_goal( (rand()*20-10), (rand()*20-10) );
-                        dock_o.charging_robot.supervisor.switch_to_state('go_to_goal');
-                        dock_o.cycles = 0;
-                    end
+                    
                 end
                 token_k = token_k.next_;
             end

@@ -4,6 +4,8 @@ classdef Dock < simiam.ui.Drawable
         occupied
         x_d
         y_d
+        cycles
+        charging_robot
     end
     
     methods
@@ -16,6 +18,8 @@ classdef Dock < simiam.ui.Drawable
            surface = obj.add_surface(geometry, [0.4 0.4 1]);
            set(surface.handle_, 'EdgeColor', 'b');
            obj.occupied = false;
+           obj.cycles = 0;
+           charging_robot = [];
         end
         
         function bool = robot_detection(obj, world)
@@ -29,8 +33,9 @@ classdef Dock < simiam.ui.Drawable
                 if(body_r_s.precheck_surface(body_o_s))
                     pts = body_r_s.intersection_with_surface(body_o_s, true);
                     bool = (size(pts,1) > 0);
-                    if (bool && (supervisor_o.goal(1) == obj.x_d) && (supervisor_o.goal(2) == obj.y_d) )
+                    if (bool && (supervisor_o.goal(1) == obj.x_d) && (supervisor_o.goal(2) == obj.y_d) && (obj.cycles ~= 500) )
                         supervisor_o.switch_to_state('stop');
+                        obj.charging_robot = robot_o;
                         return;
                     end
                 end
