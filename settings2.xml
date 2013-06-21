@@ -91,7 +91,7 @@
 		<supervisor type="khepera3.K3Supervisor" goalX = "0" goalY = "-5"/>
 		<pose x="-3" y="-3" theta="0" />
 	</robot>
-	-->    
+	    
     
     <!--
     <robot type="Khepera3">
